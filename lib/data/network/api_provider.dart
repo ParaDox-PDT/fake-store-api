@@ -9,8 +9,8 @@ import '../../models/universal_response.dart';
 import 'package:http/http.dart' as http;
 
 class ApiProvider {
-  //Products Response
-  //get response
+  //---------------------------Products Response--------------------------------
+  //-----------------------------get response-----------------------------------
 
   Future<UniversalResponse> getAllProducts() async {
     Uri uri = Uri.parse("https://fakestoreapi.com/products");
@@ -84,22 +84,15 @@ class ApiProvider {
     }
   }
 
-  //post response
-  Future<UniversalResponse> addProduct(String title, String description,
-      num price, String image, String category) async {
+  //-------------------------------post response--------------------------------
+  Future<UniversalResponse> addProduct(ProductModel productModel) async {
     Uri uri = Uri.parse("https://fakestoreapi.com/auth/login");
 
     try {
       http.Response response = await http.post(
         uri,
         body: jsonEncode(
-          <String, dynamic>{
-            "title": title,
-            "price": price,
-            "description": description,
-            "image": image,
-            "category": category
-          },
+          productModel.toJson()
         ),
       );
       if (response.statusCode == 200) {
@@ -115,23 +108,16 @@ class ApiProvider {
     }
   }
 
-  //put response
+  //--------------------------------put response--------------------------------
 
-  Future<UniversalResponse> updateProduct(String title, String description,
-      num price, String image, String category) async {
+  Future<UniversalResponse> updateProduct(ProductModel productModel) async {
     Uri uri = Uri.parse("https://fakestoreapi.com/auth/login");
 
     try {
       http.Response response = await http.post(
         uri,
         body: jsonEncode(
-          <String, dynamic>{
-            "title": title,
-            "price": price,
-            "description": description,
-            "image": image,
-            "category": category
-          },
+          productModel.toJson()
         ),
       );
       if (response.statusCode == 200) {
@@ -147,7 +133,7 @@ class ApiProvider {
     }
   }
 
-  //delete response
+  //--------------------------------delete response-----------------------------
 
   Future<UniversalResponse> deleteProduct(String id)async{
     Uri uri = Uri.parse("https://fakestoreapi.com/products/$id");
@@ -167,7 +153,7 @@ class ApiProvider {
     }
   }
 
-  //User Response
+  //--------------------------------User Response-------------------------------
 
   Future<UniversalResponse> getAllUsers() async {
     Uri uri = Uri.parse("https://fakestoreapi.com/users");
@@ -187,7 +173,7 @@ class ApiProvider {
     }
   }
 
-  //Category Response
+  //----------------------------Category Response-------------------------------
 
   Future<UniversalResponse> getAllCategories() async {
     Uri uri = Uri.parse("https://fakestoreapi.com/products/categories");
@@ -223,7 +209,7 @@ class ApiProvider {
     }
   }
 
-  // Login Response
+  //---------------------------------Login Response-----------------------------
 
   Future<UniversalResponse> postLoginUser(
       String username, String password) async {

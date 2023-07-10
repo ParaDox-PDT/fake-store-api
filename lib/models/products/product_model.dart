@@ -7,7 +7,7 @@ class ProductModel {
   final String description;
   final String category;
   final String image;
-  final Rating? rating;
+  final Rating rating;
 
   ProductModel(
       {required this.id,
@@ -15,7 +15,7 @@ class ProductModel {
       required this.price,
       required this.category,
       required this.description,
-      this.rating,
+      required this.rating,
       required this.image});
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -25,7 +25,7 @@ class ProductModel {
         price: json["price"] as num? ?? 0,
         category: json["category"] as String? ?? "",
         description: json["description"] as String? ?? "",
-        rating: Rating.fromJson(json["rating"]),
+        rating: json["rating"] !=null?Rating.fromJson(json["rating"]):Rating(rate: 0, count: 0),
         image: json["image"] as String? ?? "");
   }
 
@@ -37,7 +37,7 @@ class ProductModel {
       "category":category,
       "description":description,
       "image":image,
-      "rating":rating!.toJson(),
+      "rating":rating.toJson(),
     };
   }
 }
