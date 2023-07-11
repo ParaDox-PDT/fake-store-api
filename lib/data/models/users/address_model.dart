@@ -1,4 +1,6 @@
-import 'package:flutter_defualt_project/models/users/geolocation_model.dart';
+
+
+import 'geolocation_model.dart';
 
 class AddressModel {
   final GeolocationModel geolocationModel;

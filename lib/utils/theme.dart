@@ -5,13 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'colors.dart';
 
 class AppTheme {
-  static ThemeData darkTheme = ThemeData(
-    scaffoldBackgroundColor: AppColors.black,
+  static ThemeData lightTheme = ThemeData(
+    scaffoldBackgroundColor: AppColors.white,
     appBarTheme: const AppBarTheme(
       elevation: 0,
-      backgroundColor: AppColors.black,
+      backgroundColor: AppColors.white,
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: AppColors.black,
+        statusBarColor: Colors.transparent,
         statusBarBrightness: Brightness.light,
         statusBarIconBrightness: Brightness.light,
       ),
@@ -47,30 +47,30 @@ class AppTheme {
       headlineSmall: TextStyle(
           color: AppColors.textColor,
           fontSize: 24.sp,
-          fontWeight: FontWeight.w400,
-          fontFamily: "Poppins"),
+          fontWeight: FontWeight.w600,
+          fontFamily: "Playfair"),
       //title
       titleLarge: TextStyle(
           color: AppColors.textColor,
           fontSize: 22.sp,
           fontWeight: FontWeight.w700,
-          fontFamily: "Poppins"),
+          fontFamily: "Playfair"),
       titleMedium: TextStyle(
           color: AppColors.textColor,
           fontSize: 16.sp,
-          fontWeight: FontWeight.w600,
-          fontFamily: "Poppins"),
+          fontWeight: FontWeight.w700,
+          fontFamily: "Playfair"),
       titleSmall: TextStyle(
           color: AppColors.textColor,
           fontSize: 14.sp,
           fontWeight: FontWeight.w500,
-          fontFamily: "Poppins"),
+          fontFamily: "Playfair"),
       //label
       labelLarge: TextStyle(
           color: AppColors.textColor,
-          fontSize: 14.sp,
-          fontWeight: FontWeight.w600,
-          fontFamily: "Poppins"),
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w500,
+          fontFamily: "Work Sans"),
       labelMedium: TextStyle(
           color: AppColors.textColor,
           fontSize: 12.sp,
@@ -99,5 +99,5 @@ class AppTheme {
           fontFamily: "Poppins"),
     ),
   );
-  static ThemeData lightTheme = ThemeData();
+  static ThemeData darkTheme = ThemeData();
 }

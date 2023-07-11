@@ -1,5 +1,7 @@
-import 'package:flutter_defualt_project/models/users/address_model.dart';
-import 'package:flutter_defualt_project/models/users/name_model.dart';
+
+
+import 'address_model.dart';
+import 'name_model.dart';
 
 class UserModel {
   final AddressModel addressModel;

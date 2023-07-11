@@ -1,4 +1,6 @@
-import 'package:flutter_defualt_project/models/products/rating_model.dart';
+
+
+import 'package:flutter_defualt_project/data/models/products/rating_model.dart';
 
 class ProductModel {
   final num id;

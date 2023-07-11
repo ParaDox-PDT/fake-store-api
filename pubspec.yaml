@@ -31,6 +31,7 @@ dependencies:
   path_provider: ^2.0.15
   path: ^1.8.3
   mask_text_input_formatter: ^2.4.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
@@ -72,4 +73,44 @@ flutter:
         - asset: assets/fonts/Poppins/Montserrat-SemiBoldItalic.ttf
         - asset: assets/fonts/Poppins/Montserrat-Thin.ttf
         - asset: assets/fonts/Poppins/Montserrat-ThinItalic.ttf
+          style: italic
+
+
+    - family: Work Sans
+      fonts:
+        - asset: assets/fonts/Work_Sans/WorkSans-Black.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-BlackItalic.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-Bold.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-BoldItalic.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-ExtraBold.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-ExtraLight.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-ExtraLightItalic.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-Italic.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-Light.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-LightItalic.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-Medium.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-MediumItalic.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-Regular.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-SemiBold.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-SemiBoldItalic.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-Thin.ttf
+        - asset: assets/fonts/Work_Sans/WorkSans-ThinItalic.ttf
+          style: italic
+
+
+    - family: Playfair
+      fonts:
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-Black.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-BlackItalic.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-Bold.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-BoldItalic.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-ExtraBold.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-Italic.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-Medium.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-MediumItalic.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-Regular.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-SemiBold.ttf
+        - asset: assets/fonts/Playfair_Display/PlayfairDisplay-SemiBoldItalic.ttf
           style: italic

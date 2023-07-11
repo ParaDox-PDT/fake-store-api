@@ -9,7 +9,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'data/local/service/hive_service.dart';
 import 'data/local/storage_repository/storage_repository.dart';
-import 'models/default_model.dart';
+import 'data/models/default_model.dart';
 
 
 Future<void> main() async {
@@ -50,11 +50,11 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          themeMode: ThemeMode.dark,
+          themeMode: ThemeMode.light,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
-          initialRoute: RouteNames.homeScreen,
+          initialRoute: RouteNames.splashScreen,
           onGenerateRoute: AppRoutes.generateRoute,
         );
       },
