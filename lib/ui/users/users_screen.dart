@@ -24,28 +24,31 @@ class _UsersScreenState extends State<UsersScreen> {
         title: Text("Users Screen",style: Theme.of(context).textTheme.titleLarge,),
         centerTitle: true,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ZoomTapAnimation(
-            onTap: (){
-              StorageRepository.deleteString("token");
-              Navigator.pushReplacementNamed(context, RouteNames.loginScreen,arguments:loginRepo );
-            },
-            child: Container(
-            width: double.infinity,
-            height: 50.h,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50.r),
-                color: Colors.blue),
-            child: Center(
-              child: Text(
-                "Log out",
-                style: Theme.of(context).textTheme.headlineSmall,
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ZoomTapAnimation(
+              onTap: (){
+                StorageRepository.deleteString("token");
+                Navigator.pushReplacementNamed(context, RouteNames.loginScreen,arguments:loginRepo );
+              },
+              child: Container(
+              width: double.infinity,
+              height: 50.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50.r),
+                  color: Colors.blue),
+              child: Center(
+                child: Text(
+                  "Log out",
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
-            ),
-          ),)
-        ],
+            ),)
+          ],
+        ),
       ),
     );
   }

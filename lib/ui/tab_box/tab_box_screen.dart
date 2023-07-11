@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_defualt_project/ui/home/home_screen.dart';
+import 'package:flutter_defualt_project/ui/tab_box/wdigets/search_view_items.dart';
+import 'package:flutter_defualt_project/utils/colors.dart';
+import 'package:flutter_defualt_project/utils/icons.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
+import '../../data/models/products/product_model.dart';
 import '../../data/network/providers/api_provider.dart';
 import '../../data/network/repositories/category_repo.dart';
 import '../../data/network/repositories/product_repo.dart';
@@ -17,16 +24,29 @@ class TabBox extends StatefulWidget {
 }
 
 class _TabBoxState extends State<TabBox> {
+  ApiProvider provider = ApiProvider();
+  String activeCategoryName = "";
   List<Widget> screens = [];
   int activePage = 0;
+  late List<ProductModel> products;
+  bool isLoading = false;
 
-  late ProductRepo productRepo;
+  late ProductRepo productRepo = ProductRepo(apiProvider: provider);
   late UserRepo userRepo;
   late CategoryRepo categoryRepo;
 
+  _updateProducts() async {
+    setState(() {
+      isLoading = true;
+    });
+    products = await productRepo.getProductsByCategory(activeCategoryName);
+    setState(() {
+      isLoading = false;
+    });
+  }
+
   @override
   void initState() {
-    productRepo = ProductRepo(apiProvider: widget.apiProvider);
     categoryRepo = CategoryRepo(apiProvider: widget.apiProvider);
     userRepo = UserRepo(apiProvider: widget.apiProvider);
     screens.add(HomeScreen(
@@ -36,37 +56,68 @@ class _TabBoxState extends State<TabBox> {
     screens.add(UsersScreen(
       userRepo: userRepo,
     ));
+    _updateProducts();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: activePage,
-        children: screens,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: activePage,
-        onTap: (index) {
-          setState(() {
-            activePage = index;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.shop,
-              color: Colors.black,
-            ),
-            label: "Products",
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          IndexedStack(
+            index: activePage,
+            children: screens,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.people,
-              color: Colors.black,
+          Container(
+            height: 65.h,
+            width: 351.w,
+            margin: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(70.r),
+              color: AppColors.white,
+              border: Border.all(width: 1, color: Colors.black),
             ),
-            label: "Users",
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ZoomTapAnimation(
+                    onTap: () {
+                      activePage = 0;
+                      setState(() {});
+                    },
+                    child: SvgPicture.asset(AppIcons.home)),
+                ZoomTapAnimation(
+                    onTap: () {
+                      activePage = 1;
+                      setState(() {});
+                    },
+                    child: Icon(
+                      Icons.person,
+                      size: 28.w,
+                    )),
+                ZoomTapAnimation(
+                    onTap: () {
+                      showSearch(
+                          context: context,
+                          delegate: ProductSearchView(products: products));
+                    },
+                    child: SvgPicture.asset(AppIcons.search)),
+                ZoomTapAnimation(
+                    onTap: () {
+                      activePage = 3;
+                      setState(() {});
+                    },
+                    child: SvgPicture.asset(AppIcons.heart)),
+                ZoomTapAnimation(
+                    onTap: () {
+                      activePage = 4;
+                      setState(() {});
+                    },
+                    child: SvgPicture.asset(AppIcons.cart)),
+              ],
+            ),
           ),
         ],
       ),
