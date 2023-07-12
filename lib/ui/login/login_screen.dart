@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_defualt_project/data/local/storage_repository/storage_repository.dart';
 import 'package:flutter_defualt_project/data/network/repositories/login_repo.dart';
 import 'package:flutter_defualt_project/ui/app_routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -89,9 +90,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 });
                 {
                   isLogin
-                      ? Navigator.pushReplacementNamed(
-                          context, RouteNames.tabBoxScreen,
-                          arguments: ApiProvider())
+                      ? {
+                    StorageRepository.putString("username", _userNameController.text),
+                    StorageRepository.putString("password", _passwordController.text),
+                    Navigator.pushReplacementNamed(
+                        context, RouteNames.tabBoxScreen,
+                        arguments: ApiProvider()),
+                  }
                       : ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                             content: Text(

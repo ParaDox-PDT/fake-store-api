@@ -32,6 +32,8 @@ dependencies:
   path: ^1.8.3
   mask_text_input_formatter: ^2.4.0
   carousel_slider: ^4.2.1
+  like_button: ^2.0.5
+  image_picker: ^1.0.0
 
 dev_dependencies:
   flutter_test:

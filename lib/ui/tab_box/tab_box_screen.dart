@@ -1,5 +1,8 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_defualt_project/data/local/storage_repository/storage_repository.dart';
 import 'package:flutter_defualt_project/ui/home/home_screen.dart';
+import 'package:flutter_defualt_project/ui/product_add/product_add_screen.dart';
 import 'package:flutter_defualt_project/ui/tab_box/wdigets/search_view_items.dart';
 import 'package:flutter_defualt_project/utils/colors.dart';
 import 'package:flutter_defualt_project/utils/icons.dart';
@@ -30,6 +33,7 @@ class _TabBoxState extends State<TabBox> {
   int activePage = 0;
   late List<ProductModel> products;
   bool isLoading = false;
+  List<String> likes = StorageRepository.getList("likes");
 
   late ProductRepo productRepo = ProductRepo(apiProvider: provider);
   late UserRepo userRepo;
@@ -56,6 +60,7 @@ class _TabBoxState extends State<TabBox> {
     screens.add(UsersScreen(
       userRepo: userRepo,
     ));
+    screens.add(ProductAddScreen(productRepo: productRepo));
     _updateProducts();
     super.initState();
   }
@@ -90,15 +95,6 @@ class _TabBoxState extends State<TabBox> {
                     child: SvgPicture.asset(AppIcons.home)),
                 ZoomTapAnimation(
                     onTap: () {
-                      activePage = 1;
-                      setState(() {});
-                    },
-                    child: Icon(
-                      Icons.person,
-                      size: 28.w,
-                    )),
-                ZoomTapAnimation(
-                    onTap: () {
                       showSearch(
                           context: context,
                           delegate: ProductSearchView(products: products));
@@ -106,16 +102,25 @@ class _TabBoxState extends State<TabBox> {
                     child: SvgPicture.asset(AppIcons.search)),
                 ZoomTapAnimation(
                     onTap: () {
-                      activePage = 3;
+                      activePage=2;
                       setState(() {});
                     },
-                    child: SvgPicture.asset(AppIcons.heart)),
+                    child: Icon(Icons.add,size: 28.w,)),
+                // ZoomTapAnimation(
+                //     onTap: () {
+                //       activePage = 4;
+                //       setState(() {});
+                //     },
+                //     child: SvgPicture.asset(AppIcons.cart)),
                 ZoomTapAnimation(
                     onTap: () {
-                      activePage = 4;
+                      activePage = 1;
                       setState(() {});
                     },
-                    child: SvgPicture.asset(AppIcons.cart)),
+                    child: Icon(
+                      Icons.person,
+                      size: 28.w,
+                    )),
               ],
             ),
           ),
@@ -123,4 +128,5 @@ class _TabBoxState extends State<TabBox> {
       ),
     );
   }
+
 }

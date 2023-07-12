@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_defualt_project/data/models/products/product_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 import '../../../utils/colors.dart';

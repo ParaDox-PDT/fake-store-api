@@ -39,6 +39,15 @@ class ProductRepo{
     return [];
   }
 
+  Future<ProductModel?> getProductById(ProductModel productModel) async {
+    UniversalResponse universalResponse =
+    await apiProvider.getProductsById(id: productModel.id.toString());
+    if (universalResponse.error.isEmpty) {
+      return universalResponse.data as ProductModel;
+    }
+    return null;
+  }
+
   Future<ProductModel?> addProduct(ProductModel productModel) async {
     UniversalResponse universalResponse =
     await apiProvider.addProduct(productModel);
