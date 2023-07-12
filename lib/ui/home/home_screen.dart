@@ -6,6 +6,7 @@ import 'package:flutter_defualt_project/ui/home/widgets/grid_view_item.dart';
 import 'package:flutter_defualt_project/ui/home/widgets/home_screen_appbar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:like_button/like_button.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 import '../../data/models/products/product_model.dart';
 import '../../data/network/repositories/category_repo.dart';
 import '../../data/network/repositories/product_repo.dart';
@@ -26,7 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<ProductModel> products = [];
   List<String> categories = [];
-  List<String> likes=StorageRepository.getList("likes");
+  List<String> likes = StorageRepository.getList("likes");
+  int sort = -1;
+  TextEditingController limitcontroller = TextEditingController();
 
   bool isLoading = false;
   int pageIndex = 0;
@@ -36,33 +39,79 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       isLoading = true;
     });
-    products =
-        await widget.productRepo.getProductsByCategory(activeCategoryName);
+    if (sort == 3) {
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Container(
+              height: 100.h,
+              child: Column(
+                children: [
+                  TextField(
+                    controller: limitcontroller,
+                    decoration: InputDecoration(hintText: "Change limit"),
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  ZoomTapAnimation(
+                    child: Text("Apply"),
+                    onTap: () async {
+                      if (mounted) {
+                        Navigator.pop(context);
+                      }
+                      products = await widget.productRepo
+                          .getProductByLimit(limitcontroller.text);
+                      limitcontroller.clear();
+                      setState(
+                        () {
+                          sort = -1;
+                        },
+                      );
+                    },
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    } else {
+      products = sort == 1
+          ? await widget.productRepo.getSortedProducts("asc")
+          : sort == 2
+              ? await widget.productRepo.getSortedProducts("desc")
+              : await widget.productRepo
+                  .getProductsByCategory(activeCategoryName);
+    }
     setState(() {
       isLoading = false;
     });
   }
-  bool isLiked(String id){
-    bool isLike=false;
+
+  bool isLiked(String id) {
+    bool isLike = false;
     for (var element in likes) {
-      if (element==id){
-        isLike=true;
+      if (element == id) {
+        isLike = true;
       }
     }
-    if(isLike)return true;
+    if (isLike) return true;
     return false;
   }
 
-   bool checkLiked(String id){
-    bool alreadyLiked=false;
+  bool checkLiked(String id) {
+    bool alreadyLiked = false;
     for (var element in likes) {
-      if(element==id)alreadyLiked=true;
+      if (element == id) alreadyLiked = true;
     }
-    if(alreadyLiked){
-      likes.removeWhere((element) => element==id);
+    if (alreadyLiked) {
+      likes.removeWhere((element) => element == id);
       StorageRepository.putList("likes", likes);
       return false;
-    }else{
+    } else {
       likes.add(id);
       StorageRepository.putList("likes", likes);
       return true;
@@ -83,7 +132,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const HomeScreenAppbar(),
+      appBar: HomeScreenAppbar(
+        onMenuTap: (int item) {
+          sort = item;
+          _updateProducts();
+          setState(() {});
+        },
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: Column(
@@ -126,10 +181,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     top: 10.h,
                                     right: 10.w,
                                     child: LikeButton(
-                                      onTap: (isLiked) async{
-                                        return checkLiked(product.id.toString());
+                                      onTap: (isLiked) async {
+                                        return checkLiked(
+                                            product.id.toString());
                                       },
-                                      isLiked: isLiked(product.id.toString()) ,
+                                      isLiked: isLiked(product.id.toString()),
                                     ),
                                   )
                                 ],

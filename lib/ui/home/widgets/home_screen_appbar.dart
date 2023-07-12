@@ -7,14 +7,30 @@ import '../../../utils/icons.dart';
 import '../../../utils/images.dart';
 
 class HomeScreenAppbar extends StatelessWidget  implements PreferredSize{
-  const HomeScreenAppbar({super.key});
+  const HomeScreenAppbar({super.key, required this.onMenuTap});
+
+
+  final ValueChanged<int> onMenuTap;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        onPressed: () {},
-        icon: SvgPicture.asset(AppIcons.menu),
+      leading: PopupMenuButton<int>(
+          icon:SvgPicture.asset(AppIcons.menu),
+          onSelected: onMenuTap,
+          itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
+            const PopupMenuItem<int>(
+              value: 1,
+              child: Text('Sort by A-Z'),
+            ),
+            const PopupMenuItem<int>(
+              value: 2,
+              child: Text('Sort by Z-A'),
+            ),const PopupMenuItem<int>(
+              value: 3,
+              child: Text('Get by limit'),
+            ),
+          ]
       ),
       title: Text(
         "products",

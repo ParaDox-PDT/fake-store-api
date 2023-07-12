@@ -65,7 +65,7 @@ class ProductSearchView extends SearchDelegate {
                   fontFamily: "Roboto",
                   fontWeight: FontWeight.w600,
                   color: Colors.black),
-              subtitle: SizedBox(height: 35.h,child: Text(product[index].description),),
+              subtitle: Text(product[index].description,maxLines: 2,overflow: TextOverflow.ellipsis,),
               subtitleTextStyle: const TextStyle(
                   fontSize: 14,
                   fontFamily: "Roboto",

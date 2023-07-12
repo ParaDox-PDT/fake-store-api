@@ -30,14 +30,13 @@ class GridViewItem extends StatelessWidget {
           SizedBox(
             height: 12.h,
           ),
-          SizedBox(
-              height: 42.h,
-              child: Text(
-                product.title,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium,
-                overflow: TextOverflow.clip,
-              )),
+          Text(
+            product.title,
+            maxLines: 2,
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.titleMedium,
+            overflow: TextOverflow.ellipsis,
+          ),
           SizedBox(
             height: 18.h,
           ),
